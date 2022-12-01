@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('attendance_records', function (Blueprint $table) {
             $table->id();
             $table->foreignId("user_id");
-            $table->float("lat", 3, 8);
-            $table->float("long", 3, 8);
+            $table->double("lat", 7, 7);
+            $table->double("long", 7, 7);
             $table->enum("status", ["hadir", "sakit", "izin"]);
             $table->string("catatan")->nullable();
             $table->timestamps();
