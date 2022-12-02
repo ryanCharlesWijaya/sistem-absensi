@@ -12,6 +12,8 @@
             polygons: [],
             marker: null,
             deviceUUID: null,
+            hasDevice: {!! (auth()->user()->device && auth()->user()->device->status == "approved") ? "true" : "false" !!},
+            databaseUUID: `{!! (auth()->user()->device && auth()->user()->device->status == "approved") ? auth()->user()->device->uuid : null !!}`,
             showPosition: function (position) {
                 document.getElementById("demo").innerHTML = "Latitude: " + position.coords.latitude +
                 "<br>Longitude: " + position.coords.longitude;
@@ -138,8 +140,8 @@
                     </form>
                 @endif
 
-                @if (!(auth()->user()->device && auth()->user()->device->status == "approved") && auth()->user()->email !== 'admin@email.com')
-                    <div class="card">
+                <div class="card">
+                    <template x-if="!(deviceUUID && hasDevice && databaseUUID == deviceUUID)">
                         <div class="card-body">
                             <h4 class="card-title">Daftar Perangkat</h4>
                             <form action="{{ route("karyawan.register-device") }}" method="post">
@@ -151,8 +153,8 @@
                                 @endif
                             </form>
                         </div>
-                    </div>
-                @endif
+                    </template>
+                </div>
             </div>
         </div>
     </div>

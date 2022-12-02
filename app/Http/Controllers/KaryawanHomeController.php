@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AllowableArea;
 use App\Models\AttendanceRecord;
+use App\Models\Device;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +21,8 @@ class KaryawanHomeController extends Controller
     public function registerDevice()
     {
         $user = User::findOrFail(Auth::id());
+
+        Device::where("user_id", $user->id)->delete();
 
         $device = $user->device()
             ->create([
