@@ -36,6 +36,7 @@ Route::group([
         Route::get("/", [UserController::class, 'index'])->name("index");
         Route::get("/create", [UserController::class, 'create'])->name("create");
         Route::post("/", [UserController::class, 'store'])->name("store");
+        Route::get("/{user}/detail", [UserController::class, 'show'])->name("show");
         Route::get("/{user}/edit", [UserController::class, 'edit'])->name("edit");
         Route::post("/{user}/update", [UserController::class, 'update'])->name("update");
         Route::post("/{user}/delete", [UserController::class, 'delete'])->name("delete");
@@ -58,8 +59,9 @@ Route::group([
         "prefix" => "attendance-records",
     ], function () {
         Route::get("/", [AttendanceRecordController::class, 'index'])->name("index");
+        Route::post("/{user}/user-coordinate", [AttendanceRecordController::class, 'userCoordinate'])->name("user-attendance-records");
         Route::get("/data", [AttendanceRecordController::class, 'data'])->name("data");
-        // Route::post("/{attendance_record}/delete", [AttendanceRecordController::class, 'delete'])->name("delete");
+        Route::get("/export", [AttendanceRecordController::class, 'exportAttendance'])->name("export");
     });
 
     Route::get("/home", [HomeController::class, 'index'])->name("dashboard");
