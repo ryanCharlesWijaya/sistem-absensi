@@ -71,6 +71,7 @@ class UserController extends Controller
 
     public function delete(User $user)
     {
+        $user->attendance_records()->delete();
         $user->delete();
 
         return redirect(route("admin.users.index"));

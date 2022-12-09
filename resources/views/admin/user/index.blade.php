@@ -51,6 +51,7 @@
                                             @endif
 
                                             @if ($user->email !== "admin@email.com")
+                                                <a href="{{ route("admin.users.show", $user) }}" class="btn btn-sm btn-primary me-2">Detail</a>
                                                 <a href="{{ route("admin.users.edit", $user) }}" class="btn btn-sm btn-info me-2">Edit</a>
                                                 <form action="{{ route("admin.users.delete", $user) }}" method="POST">
                                                     @csrf
